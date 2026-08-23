@@ -1,5 +1,5 @@
 cask "visual-studio-code@1.111.0" do
-  arch arm: "arm64", intel: "x86_64"
+  arch arm: "arm", intel: "intel"
 
   on_catalina :or_older do
     version "1.97.2"
@@ -17,7 +17,7 @@ cask "visual-studio-code@1.111.0" do
            intel: "d7ed4b8a7e0a1f7062ae203a9b44c99551b89bd5e5f8fc84e5c2456e8ace0133"
   end
 
-  url "https://github.com/baobao1270/homebrew-cask/releases/download/2026.08.24.1/visual-studio-code@1.111.0_#{version}_#{arch}.zip"
+  url "https://github.com/baobao1270/homebrew-cask/releases/download/2026.08.24.2/visual-studio-code@1.111.0_#{version}-#{arch}.zip"
   name "Microsoft Visual Studio Code"
   name "VS Code"
   desc "Open-source code editor"
