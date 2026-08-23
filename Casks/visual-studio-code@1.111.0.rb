@@ -49,7 +49,10 @@ cask "visual-studio-code@1.111.0" do
     settings_path = Pathname.new(Dir.home)/"Library/Application Support/Code/User/settings.json"
 
     if settings_path.exist?
-      opoo "VS Code settings already exist at #{settings_path}; update.mode was not changed."
+      opoo <<~EOS
+        VS Code settings already exist at #{settings_path}; automatic updates were not disabled.
+        Add "update.mode": "none" to this file to disable them.
+      EOS
     else
       settings_path.dirname.mkpath
       settings_path.write <<~JSON
