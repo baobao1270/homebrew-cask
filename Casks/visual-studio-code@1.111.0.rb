@@ -1,4 +1,4 @@
-cask "visual-studio-code" do
+cask "visual-studio-code@1.111.0" do
   arch arm: "darwin-arm64", intel: "darwin"
 
   on_catalina :or_older do
@@ -44,6 +44,21 @@ cask "visual-studio-code" do
   app "Visual Studio Code.app"
   binary "#{appdir}/Visual Studio Code.app/Contents/Resources/app/bin/code"
   binary "#{appdir}/Visual Studio Code.app/Contents/Resources/app/bin/code-tunnel"
+
+  postflight do
+    settings_path = Pathname.new(Dir.home)/"Library/Application Support/Code/User/settings.json"
+
+    if settings_path.exist?
+      opoo "VS Code settings already exist at #{settings_path}; update.mode was not changed."
+    else
+      settings_path.dirname.mkpath
+      settings_path.write <<~JSON
+        {
+          "update.mode": "none"
+        }
+      JSON
+    end
+  end
 
   uninstall launchctl: "com.microsoft.VSCode.ShipIt",
             quit:      "com.microsoft.VSCode"
